@@ -1,5 +1,26 @@
+import { Link, useNavigate } from 'react-router-dom';
+
 export default function Footer() {
-  const navigate = window.REACT_APP_NAVIGATE;
+  const navigate = useNavigate();
+
+  const scrollToSection = (sectionId: string) => {
+    // If we're not on the home page, navigate there first
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <footer className="bg-emerald-400 text-black py-10 sm:py-12 md:py-16 px-4 relative">
@@ -13,7 +34,7 @@ export default function Footer() {
               Transforming businesses with intelligent AI solutions that deliver real results.
             </p>
             <div className="flex gap-3 sm:gap-4">
-              <a 
+              <a
                 href="https://www.linkedin.com/company/shiftora-ai"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -27,37 +48,37 @@ export default function Footer() {
           <div className="sm:col-span-2">
             <h4 className="font-black text-base sm:text-lg md:text-xl mb-4 sm:mb-6">Quick Links</h4>
             <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-3">
-              <button 
+              <button
                 onClick={() => scrollToSection('home')}
                 className="block font-bold text-sm sm:text-base hover:underline transition-all cursor-pointer text-left"
               >
                 Home
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('about')}
                 className="block font-bold text-sm sm:text-base hover:underline transition-all cursor-pointer text-left"
               >
                 About Us
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('features')}
                 className="block font-bold text-sm sm:text-base hover:underline transition-all cursor-pointer text-left"
               >
                 Features
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('solutions')}
                 className="block font-bold text-sm sm:text-base hover:underline transition-all cursor-pointer text-left"
               >
                 Solutions
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('demo')}
                 className="block font-bold text-sm sm:text-base hover:underline transition-all cursor-pointer text-left"
               >
                 Interactive Demo
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('contact')}
                 className="block font-bold text-sm sm:text-base hover:underline transition-all cursor-pointer text-left"
               >
@@ -70,14 +91,14 @@ export default function Footer() {
         <div className="border-t-2 sm:border-t-4 border-black pt-6 sm:pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 text-xs sm:text-sm font-bold">
-              <button 
-                onClick={() => navigate('/privacy-policy')}
+              <Link
+                to="/privacy-policy"
                 className="hover:underline cursor-pointer"
               >
                 Privacy Policy
-              </button>
+              </Link>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
               <p className="text-xs sm:text-sm font-bold text-center">© 2025 Shiftora.ai. All rights reserved.</p>
             </div>

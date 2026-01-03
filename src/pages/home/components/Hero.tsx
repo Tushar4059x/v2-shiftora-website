@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const [currentText, setCurrentText] = useState(0);
@@ -78,13 +79,13 @@ export default function Hero() {
             </a>
           </div>
           <div className="bg-white p-2 sm:p-3 border-2 sm:border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-            <a
-              href="/requirements"
+            <Link
+              to="/requirements"
               className="bg-emerald-400 text-black px-4 sm:px-6 md:px-8 py-3 sm:py-4 font-bold text-sm sm:text-base md:text-lg border-2 sm:border-4 border-black hover:bg-emerald-500 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] whitespace-nowrap cursor-pointer inline-block"
             >
               <i className="ri-file-text-line mr-2"></i>
               Send Requirements
-            </a>
+            </Link>
           </div>
         </div>
 
