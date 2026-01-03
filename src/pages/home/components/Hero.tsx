@@ -65,7 +65,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="flex justify-center mb-10 px-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10 px-4">
           <div className="bg-white p-2 sm:p-3 border-2 sm:border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
             <a
               href="https://cal.com/shreshth-daga-rxfhkj/30min"
@@ -75,6 +75,15 @@ export default function Hero() {
             >
               <i className="ri-calendar-line mr-2"></i>
               Book Free Consultation
+            </a>
+          </div>
+          <div className="bg-white p-2 sm:p-3 border-2 sm:border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+            <a
+              href="/requirements"
+              className="bg-emerald-400 text-black px-4 sm:px-6 md:px-8 py-3 sm:py-4 font-bold text-sm sm:text-base md:text-lg border-2 sm:border-4 border-black hover:bg-emerald-500 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] whitespace-nowrap cursor-pointer inline-block"
+            >
+              <i className="ri-file-text-line mr-2"></i>
+              Send Requirements
             </a>
           </div>
         </div>
