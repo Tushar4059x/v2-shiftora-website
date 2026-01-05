@@ -10,7 +10,7 @@ export default function Features() {
       description: 'Automate complex business processes with AI that learns and adapts to your workflow patterns.',
       details: 'Our automation engine uses machine learning to understand your business logic and continuously optimize processes for maximum efficiency.',
       color: 'bg-emerald-400',
-      image: '/images/features/intelligent-automation.png'
+      image: '/images/features/intelligent-automation.webp'
     },
     {
       icon: 'ri-bar-chart-box-line',
@@ -18,7 +18,7 @@ export default function Features() {
       description: 'Forecast trends and make data-driven decisions with advanced machine learning models.',
       details: 'Leverage historical data and real-time inputs to predict market trends, customer behavior, and operational needs.',
       color: 'bg-purple-400',
-      image: '/images/features/predictive-analytics.png'
+      image: '/images/features/predictive-analytics.webp'
     },
     {
       icon: 'ri-chat-3-line',
@@ -26,7 +26,7 @@ export default function Features() {
       description: 'Extract insights from unstructured data and enable natural language interactions.',
       details: 'Process documents, emails, and conversations to extract meaningful insights and automate responses.',
       color: 'bg-orange-400',
-      image: '/images/features/natural-language-processing.png'
+      image: '/images/features/natural-language-processing.webp'
     },
     {
       icon: 'ri-eye-line',
@@ -34,7 +34,7 @@ export default function Features() {
       description: 'Analyze images and videos to automate visual inspection and quality control processes.',
       details: 'Detect defects, classify objects, and monitor processes using state-of-the-art computer vision algorithms.',
       color: 'bg-pink-400',
-      image: '/images/features/computer-vision.png'
+      image: '/images/features/computer-vision.webp'
     },
     {
       icon: 'ri-links-line',
@@ -42,7 +42,7 @@ export default function Features() {
       description: 'Connect with your existing tools and systems without disrupting current workflows.',
       details: 'API-first architecture ensures smooth integration with CRM, ERP, and other business-critical systems.',
       color: 'bg-yellow-400',
-      image: '/images/features/seamless-integration.png'
+      image: '/images/features/seamless-integration.webp'
     },
     {
       icon: 'ri-shield-check-line',
@@ -50,7 +50,7 @@ export default function Features() {
       description: 'Bank-level security with end-to-end encryption and compliance with industry standards.',
       details: 'SOC 2 compliant infrastructure with advanced threat detection and data protection protocols.',
       color: 'bg-red-400',
-      image: '/images/features/enterprise-security.png'
+      image: '/images/features/enterprise-security.webp'
     }
   ];
 
