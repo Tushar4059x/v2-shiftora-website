@@ -9,42 +9,48 @@ export default function Features() {
       title: 'Intelligent Automation',
       description: 'Automate complex business processes with AI that learns and adapts to your workflow patterns.',
       details: 'Our automation engine uses machine learning to understand your business logic and continuously optimize processes for maximum efficiency.',
-      color: 'bg-emerald-400'
+      color: 'bg-emerald-400',
+      image: '/images/features/intelligent-automation.png'
     },
     {
       icon: 'ri-bar-chart-box-line',
       title: 'Predictive Analytics',
       description: 'Forecast trends and make data-driven decisions with advanced machine learning models.',
       details: 'Leverage historical data and real-time inputs to predict market trends, customer behavior, and operational needs.',
-      color: 'bg-purple-400'
+      color: 'bg-purple-400',
+      image: '/images/features/predictive-analytics.png'
     },
     {
       icon: 'ri-chat-3-line',
       title: 'Natural Language Processing',
       description: 'Extract insights from unstructured data and enable natural language interactions.',
       details: 'Process documents, emails, and conversations to extract meaningful insights and automate responses.',
-      color: 'bg-orange-400'
+      color: 'bg-orange-400',
+      image: '/images/features/natural-language-processing.png'
     },
     {
       icon: 'ri-eye-line',
       title: 'Computer Vision',
       description: 'Analyze images and videos to automate visual inspection and quality control processes.',
       details: 'Detect defects, classify objects, and monitor processes using state-of-the-art computer vision algorithms.',
-      color: 'bg-pink-400'
+      color: 'bg-pink-400',
+      image: '/images/features/computer-vision.png'
     },
     {
       icon: 'ri-links-line',
       title: 'Seamless Integration',
       description: 'Connect with your existing tools and systems without disrupting current workflows.',
       details: 'API-first architecture ensures smooth integration with CRM, ERP, and other business-critical systems.',
-      color: 'bg-yellow-400'
+      color: 'bg-yellow-400',
+      image: '/images/features/seamless-integration.png'
     },
     {
       icon: 'ri-shield-check-line',
       title: 'Enterprise Security',
       description: 'Bank-level security with end-to-end encryption and compliance with industry standards.',
       details: 'SOC 2 compliant infrastructure with advanced threat detection and data protection protocols.',
-      color: 'bg-red-400'
+      color: 'bg-red-400',
+      image: '/images/features/enterprise-security.png'
     }
   ];
 
@@ -70,9 +76,8 @@ export default function Features() {
               <div
                 key={index}
                 onClick={() => setActiveFeature(index)}
-                className={`bg-white rounded-lg border-2 sm:border-4 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 sm:p-6 cursor-pointer transition-all hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] ${
-                  activeFeature === index ? 'ring-2 sm:ring-4 ring-emerald-400' : ''
-                }`}
+                className={`bg-white rounded-lg border-2 sm:border-4 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 sm:p-6 cursor-pointer transition-all hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] ${activeFeature === index ? 'ring-2 sm:ring-4 ring-emerald-400' : ''
+                  }`}
               >
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className={`w-10 h-10 sm:w-12 sm:h-12 ${feature.color} rounded-full border-2 sm:border-4 border-black flex items-center justify-center flex-shrink-0`}>
@@ -98,17 +103,17 @@ export default function Features() {
                   <h3 className="font-black text-lg sm:text-xl md:text-2xl text-black">{features[activeFeature].title}</h3>
                 </div>
               </div>
-              
+
               <div className="p-4 sm:p-6 md:p-8">
                 <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-4 sm:mb-6">
                   {features[activeFeature].details}
                 </p>
-                
-                <div className="bg-gray-50 rounded-lg border-2 sm:border-4 border-black p-3 sm:p-4 md:p-6 mb-4 sm:mb-6">
-                  <img 
-                    src={`https://readdy.ai/api/search-image?query=$%7Bfeatures%5BactiveFeature%5D.title.toLowerCase%28%29%7D%20AI%20technology%20interface%20dashboard%20with%20modern%20data%20visualization%20charts%20graphs%20and%20analytics%20displays%20in%20a%20clean%20professional%20business%20environment&width=500&height=300&seq=feature-${activeFeature}&orientation=landscape`}
+
+                <div className="bg-gray-900 rounded-lg border-2 sm:border-4 border-black overflow-hidden mb-4 sm:mb-6">
+                  <img
+                    src={features[activeFeature].image}
                     alt={`${features[activeFeature].title} Interface`}
-                    className="w-full h-36 sm:h-48 object-cover object-top rounded border-2 border-black"
+                    className="w-full h-44 sm:h-56 object-cover object-center"
                   />
                 </div>
 

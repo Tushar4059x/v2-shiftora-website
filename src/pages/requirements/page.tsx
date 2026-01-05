@@ -502,13 +502,24 @@ export default function Requirements() {
                                 </div>
 
                                 {/* CTA */}
-                                <div className="text-center pt-4 pb-2">
-                                    <p className="text-xl font-black text-gray-800">
-                                        Ready to transform your business?
-                                    </p>
-                                    <p className="text-gray-500 mt-2">
-                                        Our team will reach out within 24 hours to discuss your custom automation plan.
-                                    </p>
+                                <div className="text-center pt-6 pb-4 space-y-6">
+                                    <div>
+                                        <p className="text-xl font-black text-gray-800">
+                                            Ready to transform your business?
+                                        </p>
+                                        <p className="text-gray-500 mt-2">
+                                            Let's discuss how we can automate your workflows and save you time.
+                                        </p>
+                                    </div>
+                                    <a
+                                        href="https://cal.com/shreshth-daga-rxfhkj/30min"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-block bg-black text-white px-8 py-4 font-bold text-lg border-4 border-black hover:bg-gray-800 transition-all shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] cursor-pointer"
+                                    >
+                                        <i className="ri-calendar-check-line mr-2"></i>
+                                        Book Your Free Strategy Call →
+                                    </a>
                                 </div>
                             </div>
                         )}
