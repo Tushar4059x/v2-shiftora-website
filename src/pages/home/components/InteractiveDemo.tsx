@@ -89,8 +89,8 @@ export default function InteractiveDemo() {
               key={key}
               onClick={() => setActiveDemo(key)}
               className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 font-bold text-xs sm:text-sm md:text-base border-2 sm:border-4 border-black transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap cursor-pointer ${activeDemo === key
-                  ? `${demo.color} translate-x-[-2px] translate-y-[-2px]`
-                  : 'bg-white hover:translate-x-[-1px] hover:translate-y-[-1px]'
+                ? `${demo.color} translate-x-[-2px] translate-y-[-2px]`
+                : 'bg-white hover:translate-x-[-1px] hover:translate-y-[-1px]'
                 }`}
             >
               <i className={`${demo.icon} text-base sm:text-lg`}></i>
@@ -118,8 +118,8 @@ export default function InteractiveDemo() {
                   {chatMessages.map((msg, index) => (
                     <div key={index} className={`mb-3 sm:mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[85%] sm:max-w-xs px-3 sm:px-4 py-2 rounded-lg border-2 border-black ${msg.type === 'user'
-                          ? 'bg-emerald-400 text-black'
-                          : 'bg-white text-gray-800'
+                        ? 'bg-emerald-400 text-black'
+                        : 'bg-white text-gray-800'
                         }`}>
                         <p className="text-xs sm:text-sm">{msg.message}</p>
                       </div>
@@ -253,21 +253,6 @@ export default function InteractiveDemo() {
               </div>
             )}
           </div>
-        </div>
-
-        <div className="mt-8 sm:mt-10 md:mt-12 text-center">
-          <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-4 sm:mb-6 px-2">
-            Ready to implement these solutions in your business?
-          </p>
-          <a
-            href="https://cal.com/shreshth-daga-rxfhkj/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-black text-white px-6 sm:px-8 py-3 sm:py-4 font-bold text-sm sm:text-base md:text-lg hover:bg-gray-800 transition-colors border-2 sm:border-4 border-black hover:translate-x-1 hover:translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap cursor-pointer"
-          >
-            <i className="ri-rocket-line mr-2"></i>
-            Get Started Today
-          </a>
         </div>
       </div>
     </section>
