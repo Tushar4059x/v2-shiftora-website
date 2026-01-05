@@ -31,27 +31,35 @@ export default function InteractiveDemo() {
     }
   };
 
-  const handleSendMessage = () => {
-    if (!inputMessage.trim()) return;
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim() || isProcessing) return;
 
     const newMessage = { type: 'user', message: inputMessage };
-    setChatMessages(prev => [...prev, newMessage]);
+    const updatedMessages = [...chatMessages, newMessage];
+    setChatMessages(updatedMessages);
     setInputMessage('');
     setIsProcessing(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const responses = [
-        'That\'s a great question! Our AI can help automate that process for you.',
-        'Based on your query, I recommend exploring our automation solutions.',
-        'I can connect you with a specialist who can provide more detailed information.',
-        'Our platform can definitely handle that use case. Would you like to see a demo?'
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      
-      setChatMessages(prev => [...prev, { type: 'bot', message: randomResponse }]);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: updatedMessages })
+      });
+
+      if (!response.ok) throw new Error('Failed to get response');
+
+      const data = await response.json();
+      setChatMessages(prev => [...prev, { type: 'bot', message: data.message }]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      setChatMessages(prev => [...prev, {
+        type: 'bot',
+        message: "I'm having trouble connecting right now. Please try our AI Requirements Form at /requirements for a detailed analysis!"
+      }]);
+    } finally {
       setIsProcessing(false);
-    }, 1500);
+    }
   };
 
   const analyticsData = [
@@ -80,11 +88,10 @@ export default function InteractiveDemo() {
             <button
               key={key}
               onClick={() => setActiveDemo(key)}
-              className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 font-bold text-xs sm:text-sm md:text-base border-2 sm:border-4 border-black transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap cursor-pointer ${
-                activeDemo === key 
-                  ? `${demo.color} translate-x-[-2px] translate-y-[-2px]` 
+              className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 font-bold text-xs sm:text-sm md:text-base border-2 sm:border-4 border-black transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap cursor-pointer ${activeDemo === key
+                  ? `${demo.color} translate-x-[-2px] translate-y-[-2px]`
                   : 'bg-white hover:translate-x-[-1px] hover:translate-y-[-1px]'
-              }`}
+                }`}
             >
               <i className={`${demo.icon} text-base sm:text-lg`}></i>
               <span className="hidden sm:inline">{demo.title}</span>
@@ -110,11 +117,10 @@ export default function InteractiveDemo() {
                 <div className="bg-gray-50 rounded-lg border-2 sm:border-4 border-black p-3 sm:p-4 h-64 sm:h-80 overflow-y-auto mb-3 sm:mb-4">
                   {chatMessages.map((msg, index) => (
                     <div key={index} className={`mb-3 sm:mb-4 flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`max-w-[85%] sm:max-w-xs px-3 sm:px-4 py-2 rounded-lg border-2 border-black ${
-                        msg.type === 'user' 
-                          ? 'bg-emerald-400 text-black' 
+                      <div className={`max-w-[85%] sm:max-w-xs px-3 sm:px-4 py-2 rounded-lg border-2 border-black ${msg.type === 'user'
+                          ? 'bg-emerald-400 text-black'
                           : 'bg-white text-gray-800'
-                      }`}>
+                        }`}>
                         <p className="text-xs sm:text-sm">{msg.message}</p>
                       </div>
                     </div>
@@ -161,7 +167,7 @@ export default function InteractiveDemo() {
                         <div key={index} className="flex items-center gap-2 sm:gap-4">
                           <span className="font-mono text-xs sm:text-sm w-6 sm:w-8">{data.month}</span>
                           <div className="flex-1 bg-white border-2 border-black rounded-full h-5 sm:h-6 overflow-hidden">
-                            <div 
+                            <div
                               className="h-full bg-emerald-400 transition-all duration-1000"
                               style={{ width: `${data.value}%` }}
                             ></div>
@@ -172,7 +178,7 @@ export default function InteractiveDemo() {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div className="space-y-3 sm:space-y-4">
                     <div className="bg-emerald-100 border-2 sm:border-4 border-black rounded-lg p-3 sm:p-4">
                       <h5 className="font-black text-xs sm:text-sm mb-2">Key Insights</h5>
@@ -182,7 +188,7 @@ export default function InteractiveDemo() {
                         <li>• Seasonal trends identified</li>
                       </ul>
                     </div>
-                    
+
                     <div className="bg-purple-100 border-2 sm:border-4 border-black rounded-lg p-3 sm:p-4">
                       <h5 className="font-black text-xs sm:text-sm mb-2">Recommendations</h5>
                       <ul className="text-xs sm:text-sm space-y-1">
@@ -200,35 +206,35 @@ export default function InteractiveDemo() {
               <div className="max-w-4xl mx-auto">
                 <div className="bg-gray-50 rounded-lg border-2 sm:border-4 border-black p-4 sm:p-6">
                   <h4 className="font-black text-base sm:text-lg mb-4 sm:mb-6">Workflow Automation Pipeline</h4>
-                  
+
                   <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
                     <div className="bg-white border-2 sm:border-4 border-black rounded-lg p-3 sm:p-4 text-center min-w-[90px] sm:min-w-[120px]">
                       <i className="ri-mail-line text-xl sm:text-2xl text-emerald-600 mb-1 sm:mb-2 block"></i>
                       <p className="font-bold text-xs sm:text-sm">Email Received</p>
                     </div>
-                    
+
                     <i className="ri-arrow-right-line text-lg sm:text-2xl text-gray-400"></i>
-                    
+
                     <div className="bg-emerald-100 border-2 sm:border-4 border-black rounded-lg p-3 sm:p-4 text-center min-w-[90px] sm:min-w-[120px]">
                       <i className="ri-brain-line text-xl sm:text-2xl text-purple-600 mb-1 sm:mb-2 block"></i>
                       <p className="font-bold text-xs sm:text-sm">AI Analysis</p>
                     </div>
-                    
+
                     <i className="ri-arrow-right-line text-lg sm:text-2xl text-gray-400"></i>
-                    
+
                     <div className="bg-purple-100 border-2 sm:border-4 border-black rounded-lg p-3 sm:p-4 text-center min-w-[90px] sm:min-w-[120px]">
                       <i className="ri-file-list-line text-xl sm:text-2xl text-orange-600 mb-1 sm:mb-2 block"></i>
                       <p className="font-bold text-xs sm:text-sm">Categorized</p>
                     </div>
-                    
+
                     <i className="ri-arrow-right-line text-lg sm:text-2xl text-gray-400"></i>
-                    
+
                     <div className="bg-orange-100 border-2 sm:border-4 border-black rounded-lg p-3 sm:p-4 text-center min-w-[90px] sm:min-w-[120px]">
                       <i className="ri-user-line text-xl sm:text-2xl text-red-600 mb-1 sm:mb-2 block"></i>
                       <p className="font-bold text-xs sm:text-sm">Assigned</p>
                     </div>
                   </div>
-                  
+
                   <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-3 sm:gap-4">
                     <div className="bg-white border-2 border-black rounded p-2 sm:p-3 text-center">
                       <p className="font-bold text-base sm:text-lg text-emerald-600">85%</p>
