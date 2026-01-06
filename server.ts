@@ -241,13 +241,11 @@ app.post('/api/send-report', async (req, res) => {
 `;
 
         // Send email using Resend
-        // Note: Resend free tier only allows sending to your own verified email (gulyanitushar@gmail.com)
-        // To send to clients, verify a domain at resend.com/domains
-        console.log('Sending email via Resend...');
+        console.log('Sending emails via Resend...');
 
-        // Send to your email (the account owner email that Resend allows on free tier)
-        const result = await resend.emails.send({
-            from: 'Shiftora AI <onboarding@resend.dev>',
+        // 1. Send lead notification to business
+        const businessResult = await resend.emails.send({
+            from: 'Shiftora AI <hello@shiftora.ai>',
             to: ['gulyanitushar@gmail.com'],
             subject: `[New Lead] ${companyName}: ${analysisResult.scope_title}`,
             html: `
@@ -257,18 +255,27 @@ app.post('/api/send-report', async (req, res) => {
                 <p><strong>Client Email:</strong> ${clientEmail}</p>
                 <hr/>
                 ${reportHtml}
-                <hr/>
-                <p style="color: #666; font-size: 12px;">To send reports directly to clients, verify a domain at resend.com/domains</p>
             `
         });
 
-        console.log('Email result:', result);
+        console.log('Business email result:', businessResult);
 
-        if (result.error) {
-            console.error('Resend error:', result.error);
-            res.status(500).json({ error: 'Failed to send email', details: result.error });
+        // 2. Send report to client
+        const clientResult = await resend.emails.send({
+            from: 'Shiftora AI <hello@shiftora.ai>',
+            to: [clientEmail],
+            replyTo: 'gulyanitushar@gmail.com',
+            subject: `Your AI Automation Analysis: ${analysisResult.scope_title}`,
+            html: reportHtml
+        });
+
+        console.log('Client email result:', clientResult);
+
+        if (businessResult.error || clientResult.error) {
+            console.error('Resend error:', businessResult.error || clientResult.error);
+            res.status(500).json({ error: 'Failed to send email', details: businessResult.error || clientResult.error });
         } else {
-            res.json({ success: true, message: 'Lead notification sent to your email successfully' });
+            res.json({ success: true, message: 'Report sent to you and the client successfully!' });
         }
     } catch (error) {
         console.error('Error sending email:', error);

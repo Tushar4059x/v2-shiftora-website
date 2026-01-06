@@ -102,11 +102,10 @@ export default async function handler(request: Request) {
 </div>
 `;
 
-        // Send email using Resend
-        // Note: On free tier, can only send to the account owner email
-        // After domain verification, can send to anyone
-        const result = await resend.emails.send({
-            from: 'Shiftora AI <onboarding@resend.dev>',
+        // Send email using Resend with verified domain
+        // 1. Send lead notification to business
+        const businessResult = await resend.emails.send({
+            from: 'Shiftora AI <hello@shiftora.ai>',
             to: ['gulyanitushar@gmail.com'],
             subject: `[New Lead] ${companyName}: ${analysisResult.scope_title}`,
             html: `
@@ -119,12 +118,21 @@ export default async function handler(request: Request) {
             `
         });
 
-        if (result.error) {
-            console.error('Resend error:', result.error);
-            return new Response(JSON.stringify({ error: 'Failed to send email', details: result.error }), { status: 500 });
+        // 2. Send report to client
+        const clientResult = await resend.emails.send({
+            from: 'Shiftora AI <hello@shiftora.ai>',
+            to: [clientEmail],
+            replyTo: 'gulyanitushar@gmail.com',
+            subject: `Your AI Automation Analysis: ${analysisResult.scope_title}`,
+            html: reportHtml
+        });
+
+        if (businessResult.error || clientResult.error) {
+            console.error('Resend error:', businessResult.error || clientResult.error);
+            return new Response(JSON.stringify({ error: 'Failed to send email', details: businessResult.error || clientResult.error }), { status: 500 });
         }
 
-        return new Response(JSON.stringify({ success: true, message: 'Lead notification sent successfully' }), {
+        return new Response(JSON.stringify({ success: true, message: 'Report sent to you and the client!' }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
