@@ -106,7 +106,7 @@ export default async function handler(request: Request) {
         // 1. Send lead notification to business
         const businessResult = await resend.emails.send({
             from: 'Shiftora AI <hello@shiftora.ai>',
-            to: ['gulyanitushar@gmail.com'],
+            to: ['shiftora25@gmail.com'],
             subject: `[New Lead] ${companyName}: ${analysisResult.scope_title}`,
             html: `
                 <h2>New AI Automation Analysis Request</h2>
@@ -122,7 +122,7 @@ export default async function handler(request: Request) {
         const clientResult = await resend.emails.send({
             from: 'Shiftora AI <hello@shiftora.ai>',
             to: [clientEmail],
-            replyTo: 'gulyanitushar@gmail.com',
+            replyTo: 'shiftora25@gmail.com',
             subject: `Your AI Automation Analysis: ${analysisResult.scope_title}`,
             html: reportHtml
         });
