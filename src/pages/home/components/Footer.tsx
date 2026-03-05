@@ -100,7 +100,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-              <p className="text-xs sm:text-sm font-bold text-center">© 2025 Shiftora.ai. All rights reserved.</p>
+              <p className="text-xs sm:text-sm font-bold text-center">© {new Date().getFullYear()} Shiftora.ai. All rights reserved.</p>
             </div>
           </div>
         </div>
